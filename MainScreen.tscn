@@ -1,0 +1,45 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://asset/main_screen.jpg" type="Texture" id=1]
+[ext_resource path="res://Board.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Block.tscn" type="PackedScene" id=3]
+[ext_resource path="res://MainScreen.gd" type="Script" id=4]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 1 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[node name="MainScreen" type="Node2D"]
+script = ExtResource( 4 )
+block_scene = ExtResource( 3 )
+
+[node name="MainScreen" type="AnimatedSprite" parent="."]
+position = Vector2( 284, 363 )
+frames = SubResource( 1 )
+
+[node name="Position2D" type="Position2D" parent="."]
+
+[node name="Board" parent="." instance=ExtResource( 2 )]
+position = Vector2( 286, 149 )
+
+[node name="Block" parent="." instance=ExtResource( 3 )]
+visible = false
+position = Vector2( 522, 407 )
+word = "A"
+score = 1
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="Timer" type="Timer" parent="HUD"]
+wait_time = 30.0
+one_shot = true
+
+[node name="CouterTime" type="Label" parent="HUD"]
+margin_right = 40.0
+margin_bottom = 14.0
+
+[connection signal="_emit_Words_pressed" from="." to="Board" method="_on_MainScreen__emit_Words_pressed"]
