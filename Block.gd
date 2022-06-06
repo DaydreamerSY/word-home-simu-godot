@@ -8,8 +8,8 @@ signal on_button_click(word, score)
 # var b = "text"
 
 func setDefaultWordScore():
-	$WordButton/Word.text = word
-	$WordButton/Score.text = str(score)
+	$TextureButton/Word.text = word
+	$TextureButton/Score.text = str(score)
 	
 	
 func setPosition():
@@ -21,11 +21,14 @@ func _ready():
 	pass # Replace with function body.
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
-
-
-func _on_Button_pressed():
+func _on_TextureButton_pressed():
 	emit_signal("on_button_click", word, str(score))
+	pass # Replace with function body.
+
+
+func _on_TextureButton_mouse_entered():
+	if Input.is_action_pressed("click"):
+		print("mouse is hold when enter this shit!")
+	else:
+		print("mouse enter this shit with out hold")
 	pass # Replace with function body.
