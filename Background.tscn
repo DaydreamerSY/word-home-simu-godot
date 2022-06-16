@@ -6,8 +6,8 @@
 [node name="Background" type="Node2D"]
 
 [node name="Background" type="Sprite" parent="."]
-position = Vector2( 287, 367 )
-scale = Vector2( 1.00236, 1.00236 )
+position = Vector2( 276.924, 171 )
+scale = Vector2( 0.428943, 0.339241 )
 texture = ExtResource( 2 )
 
 [node name="WordZone" type="Sprite" parent="."]

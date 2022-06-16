@@ -7,7 +7,10 @@ export var countdown = 5
 
 var clicked_word = ""
 var clicked_score = 0
+var is_word_legal = false
 var randomGenerator = RandomNumberGenerator.new()
+var is_mouse_down = false
+var is_mouse_up = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -35,9 +38,22 @@ func _ready():
 		block.connect("on_button_click", self, "_on_Words_pressed")
 		add_child(block)
 		# print_debug(get_random_pos())
-	$Timer.start()
-	
 
+func check_legal(word):
+	if len(word) > 3:
+		return true
+	return false
+
+
+func _process(delta):
+	if Input.is_action_just_released("click"):
+		print("release mouse")
+		if check_legal(clicked_word):
+			print(clicked_word)
+			print(clicked_score)
+			emit_signal("_emit_Words_pressed", clicked_word, str(clicked_score))
+		clicked_word = ""
+		clicked_score = 0
 
 func get_random_pos():
 	var x_range = Vector2(170, 445)
@@ -55,15 +71,7 @@ func get_random_pos():
 func _on_Words_pressed (word, score):
 #	print(word)
 #	print(score)
-	clicked_word = word
-	clicked_score = score
-	emit_signal("_emit_Words_pressed", word, str(score))
+	clicked_word += word
+	clicked_score += int(score)
 	pass
 
-
-func _on_Timer_timeout():
-	countdown -= 1
-	print(countdown)
-	if (countdown == 0):
-		print("game over!")
-		$Timer.stop()

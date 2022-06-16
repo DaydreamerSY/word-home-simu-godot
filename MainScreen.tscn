@@ -16,14 +16,13 @@ block_scene = ExtResource( 3 )
 position = Vector2( 280, 180 )
 
 [node name="Block" parent="." instance=ExtResource( 3 )]
+visible = false
 position = Vector2( 460, 379 )
 word = "A"
 score = 1
 
 [node name="SpawnAroundPosition" type="Position2D" parent="."]
 position = Vector2( 280, 540 )
-
-[node name="Timer" type="Timer" parent="."]
 
 [node name="HUD" type="CanvasLayer" parent="."]
 
@@ -35,4 +34,3 @@ margin_bottom = 14.0
 script = ExtResource( 5 )
 
 [connection signal="_emit_Words_pressed" from="." to="Board" method="_on_MainScreen__emit_Words_pressed"]
-[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

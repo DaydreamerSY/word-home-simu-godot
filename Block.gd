@@ -6,6 +6,7 @@ signal on_button_click(word, score)
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
+var is_mouse_down = false;
 
 func setDefaultWordScore():
 	$TextureButton/Word.text = word
@@ -19,6 +20,13 @@ func setPosition():
 func _ready():
 	setDefaultWordScore()
 	pass # Replace with function body.
+	
+func _process(delta):
+	if Input.is_action_pressed("click"):
+		is_mouse_down = true
+	else:
+		is_mouse_down = false
+		$TextureButton.set_normal_texture(load("res://asset/2.1 Play_Basic/Block_type_passive.png"))
 
 
 func _on_TextureButton_pressed():
@@ -27,8 +35,9 @@ func _on_TextureButton_pressed():
 
 
 func _on_TextureButton_mouse_entered():
-	if Input.is_action_pressed("click"):
-		print("mouse is hold when enter this shit!")
+	if is_mouse_down:
+		$TextureButton.set_normal_texture(load("res://asset/2.1 Play_Basic/Block_type_active.png"))
+		emit_signal("on_button_click", word, str(score))
 	else:
-		print("mouse enter this shit with out hold")
+		$TextureButton.set_normal_texture(load("res://asset/2.1 Play_Basic/Block_type_passive.png"))
 	pass # Replace with function body.
